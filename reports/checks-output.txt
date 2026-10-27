@@ -1,0 +1,23 @@
+PASS: Сервіс: три тарифи для 2 кг
+PASS: Сервіс: дробова вага враховується без округлення до кілограмів
+PASS: Сервіс: Id, CreatedAt та Price визначає Create
+PASS: Сервіс: Max(Id)+1, порожній список та Delete
+PASS: DI: один екземпляр у scope, різні у різних scope, спільні дані
+PASS: Мапер: вхідні та вихідний DTO з усіма потрібними даними
+PASS: Update: зміни зберігаються, час створення незмінний
+PASS: Відсутні записи: Find/Update повертають null, Delete — 0
+PASS: Валідація бізнес-правил не додає некоректні записи
+PASS: Зовнішні зміни моделей і списків не пошкоджують сховище
+  POST Department, Weight=2 -> HTTP 201, Id=1, Price=60
+  POST Courier, Weight=2 -> HTTP 201, Id=2, Price=110
+  POST ExpressCourier, Weight=2 -> HTTP 201, Id=3, Price=168
+PASS: HTTP POST: сервіс повертає автоматичні ціни 60/110/168
+PASS: HTTP POST: зайві Id/Price/CreatedAt не керують сервером
+PASS: HTTP GET: дані збережені між Scoped-запитами
+PASS: HTTP PUT: DTO редагування, збереження та незмінний CreatedAt
+PASS: HTTP: неузгоджені Id перевіряє сервіс, відповідь 400
+PASS: HTTP: некоректна вага -> 400 з Errors.Weight
+PASS: HTTP: 404 для GET, PUT і DELETE відсутнього запису
+PASS: HTTP DELETE: 204 без тіла, потім 404
+
+Успішно: 18/18
